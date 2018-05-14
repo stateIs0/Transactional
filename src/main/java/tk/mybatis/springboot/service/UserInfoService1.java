@@ -116,15 +116,15 @@ public class UserInfoService1 {
 
   }
 
-  @Transactional(timeout = 3, propagation = Propagation.REQUIRED)
+  @Transactional(timeout = 3, propagation = Propagation.NESTED)
   public void timeOut() {
-    userInfoMapper
-        .insert(new UserInfo().setUsername("timeout").setPassword("timeout"));
     try {
       Thread.sleep(3000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+    userInfoMapper
+        .insert(new UserInfo().setUsername("timeout").setPassword("timeout"));
   }
 
   @Transactional(readOnly = true)
